@@ -1,4 +1,4 @@
-package com.ndigit.rs.report;
+package com.dbsys.rs.report;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.ndigit.rs.report.controller")
+@ComponentScan("com.dbsys.rs.report.controller")
 @Import(ApplicationConfig.class)
 public class WebConfig extends WebMvcConfigurerAdapter {
 

@@ -4,7 +4,7 @@
   
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>com.ndigit.rs.report.WebConfig</param-value>
+    <param-value>com.dbsys.rs.report.WebConfig</param-value>
   </context-param>
 
   <servlet>

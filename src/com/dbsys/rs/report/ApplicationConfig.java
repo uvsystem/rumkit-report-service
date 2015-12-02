@@ -1,4 +1,4 @@
-package com.ndigit.rs.report;
+package com.dbsys.rs.report;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +26,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author Deddy Christoper Kakunsi
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.ndigit.rs.report.repository", "com.dbsys.rs.security.repository"})
+@EnableJpaRepositories(basePackages = {"com.dbsys.rs.report.repository", "com.dbsys.rs.security.repository"})
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @ComponentScan({
-	"com.ndigit.rs.report.service",
+	"com.dbsys.rs.report.service",
 	"com.dbsys.rs.lib.interceptor"
 })
 public class ApplicationConfig {

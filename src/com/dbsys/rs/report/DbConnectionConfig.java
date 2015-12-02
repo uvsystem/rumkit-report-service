@@ -1,4 +1,4 @@
-package com.ndigit.rs.report;
+package com.dbsys.rs.report;
 
 public class DbConnectionConfig {
 	// public static final String HOST = "mysql31535-core-unitedvision.whelastic.net";

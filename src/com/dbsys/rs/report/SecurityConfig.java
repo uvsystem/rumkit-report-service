@@ -1,4 +1,4 @@
-package com.ndigit.rs.report;
+package com.dbsys.rs.report;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
