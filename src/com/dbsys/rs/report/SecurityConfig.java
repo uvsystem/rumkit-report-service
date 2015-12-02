@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
         .authorizeRequests()
         	.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // untuk pre-flight request
+        	.antMatchers(HttpMethod.GET, "/**").permitAll() // untuk pre-flight request
 			.anyRequest().authenticated()
             .and()
         .httpBasic();

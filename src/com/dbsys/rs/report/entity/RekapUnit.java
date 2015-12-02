@@ -2,6 +2,7 @@ package com.dbsys.rs.report.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class RekapUnit {
@@ -10,6 +11,7 @@ public class RekapUnit {
 	private Long jumlah;
 	private Long total;
 
+	@Id
 	@Column(name = "nama")
 	public String getNama() {
 		return nama;

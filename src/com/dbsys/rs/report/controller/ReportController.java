@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dbsys.rs.lib.ApplicationException;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.report.entity.RekapStokBarang;
 import com.dbsys.rs.report.entity.RekapUnit;
 import com.dbsys.rs.report.service.ReportService;
@@ -31,6 +32,8 @@ public class ReportController {
 		List<RekapUnit> list = reportService.rekapUnit(DateUtil.getDate(awal), DateUtil.getDate(akhir));
 		ListEntityRestMessage<RekapUnit> message = new ListEntityRestMessage<>();
 		message.setList(list);
+		message.setMessage("Berhasil!");
+		message.setTipe(Type.LIST);
 		
 		return message;
 	}
@@ -41,6 +44,8 @@ public class ReportController {
 		List<RekapStokBarang> list = reportService.rekapStok(DateUtil.getDate(awal), DateUtil.getDate(akhir));
 		ListEntityRestMessage<RekapStokBarang> message = new ListEntityRestMessage<>();
 		message.setList(list);
+		message.setMessage("Berhasil!");
+		message.setTipe(Type.LIST);
 		
 		return message;
 	}
