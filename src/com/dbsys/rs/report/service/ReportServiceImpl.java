@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dbsys.rs.report.entity.RekapKembali;
 import com.dbsys.rs.report.entity.RekapPelayanan;
 import com.dbsys.rs.report.entity.RekapPemakaian;
 import com.dbsys.rs.report.entity.RekapStokBarang;
 import com.dbsys.rs.report.entity.RekapTagihan;
 import com.dbsys.rs.report.entity.RekapUnit;
+import com.dbsys.rs.report.repository.RekapKembaliRepository;
 import com.dbsys.rs.report.repository.RekapPemakaianRepository;
 import com.dbsys.rs.report.repository.RekapStokRepository;
 import com.dbsys.rs.report.repository.RekapPelayananRepository;
@@ -30,6 +32,8 @@ public class ReportServiceImpl implements ReportService {
 	private RekapPelayananRepository rekapPelayananRepository;
 	@Autowired
 	private RekapPemakaianRepository rekapPemakaianRepository;
+	@Autowired
+	private RekapKembaliRepository rekapKembaliRepository;
 	
 	@Override
 	public List<RekapUnit> rekapUnit(Date awal, Date akhir) {
@@ -45,7 +49,16 @@ public class ReportServiceImpl implements ReportService {
 	public List<RekapTagihan> rekapTagihan(Long pasien) {
 		List<RekapPelayanan> listPelayanan = rekapPelayananRepository.rekap(pasien);
 		List<RekapPemakaian> listPemakaian = rekapPemakaianRepository.rekap(pasien);
+		List<RekapKembali> listKembali = rekapKembaliRepository.rekap(pasien);
 
+		for (RekapKembali kembali : listKembali) {
+			for (RekapPemakaian pemakaian : listPemakaian) {
+				if (kembali.getNama().equals(pemakaian.getNama())) {
+					pemakaian.substract(kembali.getJumlah());
+				}
+			}
+		}
+		
 		List<RekapTagihan> listTagihan = new ArrayList<>();
 		listTagihan.addAll(listPelayanan);
 		listTagihan.addAll(listPemakaian);

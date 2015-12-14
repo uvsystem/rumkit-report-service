@@ -3,9 +3,22 @@ package com.dbsys.rs.report.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import com.dbsys.rs.lib.Penanggung;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(
+	use = JsonTypeInfo.Id.NAME,
+	include = JsonTypeInfo.As.PROPERTY,
+	property = "tipeTagihan"
+)
+@JsonSubTypes({
+	@JsonSubTypes.Type(value = RekapPelayanan.class, name = "PELAYANAN"),
+	@JsonSubTypes.Type(value = RekapPemakaian.class, name = "PEMAKAIAN"),
+	@JsonSubTypes.Type(value = RekapKembali.class, name = "KEMBALI")
+})
 @MappedSuperclass
 public class RekapTagihan {
 
@@ -17,8 +30,19 @@ public class RekapTagihan {
 	private Long tarif;
 	private Long tambahan;
 	
+	private String tipeTagihan;
+	
 	public RekapTagihan() {
 		super();
+	}
+
+	@Transient
+	public String getTipeTagihan() {
+		return tipeTagihan;
+	}
+
+	public void setTipeTagihan(String tipeTagihan) {
+		this.tipeTagihan = tipeTagihan;
 	}
 
 	@Id
