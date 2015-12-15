@@ -1,4 +1,4 @@
-package com.dbsys.rs.report.service;
+package com.dbsys.rs.report.service.impl;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dbsys.rs.report.entity.RekapKembali;
 import com.dbsys.rs.report.entity.RekapPelayanan;
-import com.dbsys.rs.report.entity.RekapPemakaian;
+import com.dbsys.rs.report.entity.RekapTagihanPelayanan;
+import com.dbsys.rs.report.entity.RekapTagihanPemakaian;
 import com.dbsys.rs.report.entity.RekapStokBarang;
 import com.dbsys.rs.report.entity.RekapTagihan;
 import com.dbsys.rs.report.entity.RekapUnit;
@@ -19,6 +20,7 @@ import com.dbsys.rs.report.repository.RekapPemakaianRepository;
 import com.dbsys.rs.report.repository.RekapStokRepository;
 import com.dbsys.rs.report.repository.RekapPelayananRepository;
 import com.dbsys.rs.report.repository.RekapUnitRepository;
+import com.dbsys.rs.report.service.ReportService;
 
 @Service
 @Transactional(readOnly = true)
@@ -47,12 +49,12 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<RekapTagihan> rekapTagihan(Long pasien) {
-		List<RekapPelayanan> listPelayanan = rekapPelayananRepository.rekap(pasien);
-		List<RekapPemakaian> listPemakaian = rekapPemakaianRepository.rekap(pasien);
+		List<RekapTagihanPelayanan> listPelayanan = rekapPelayananRepository.rekap(pasien);
+		List<RekapTagihanPemakaian> listPemakaian = rekapPemakaianRepository.rekap(pasien);
 		List<RekapKembali> listKembali = rekapKembaliRepository.rekap(pasien);
 
 		for (RekapKembali kembali : listKembali) {
-			for (RekapPemakaian pemakaian : listPemakaian) {
+			for (RekapTagihanPemakaian pemakaian : listPemakaian) {
 				if (kembali.getNama().equals(pemakaian.getNama())) {
 					pemakaian.substract(kembali.getJumlah());
 				}
@@ -64,5 +66,29 @@ public class ReportServiceImpl implements ReportService {
 		listTagihan.addAll(listPemakaian);
 		
 		return listTagihan;
+	}
+
+	@Override
+	public List<RekapTagihan> rekapTagihanPemakaian(Date awal, Date akhir) {
+		List<RekapTagihanPemakaian> listPemakaian = rekapPemakaianRepository.rekap(awal, akhir);
+		List<RekapKembali> listKembali = rekapKembaliRepository.rekap(awal, akhir);
+
+		for (RekapKembali kembali : listKembali) {
+			for (RekapTagihanPemakaian pemakaian : listPemakaian) {
+				if (kembali.getNama().equals(pemakaian.getNama())) {
+					pemakaian.substract(kembali.getJumlah());
+				}
+			}
+		}
+		
+		List<RekapTagihan> listTagihan = new ArrayList<>();
+		listTagihan.addAll(listPemakaian);
+		
+		return listTagihan;
+	}
+
+	@Override
+	public List<RekapPelayanan> rekapPelayanan(Date awal, Date akhir) {
+		return rekapPelayananRepository.rekap(awal, akhir);
 	}
 }

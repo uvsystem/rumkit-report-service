@@ -15,8 +15,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	property = "tipeTagihan"
 )
 @JsonSubTypes({
-	@JsonSubTypes.Type(value = RekapPelayanan.class, name = "PELAYANAN"),
-	@JsonSubTypes.Type(value = RekapPemakaian.class, name = "PEMAKAIAN"),
+	@JsonSubTypes.Type(value = RekapTagihanPelayanan.class, name = "PELAYANAN"),
+	@JsonSubTypes.Type(value = RekapTagihanPemakaian.class, name = "PEMAKAIAN"),
 	@JsonSubTypes.Type(value = RekapKembali.class, name = "KEMBALI")
 })
 @MappedSuperclass

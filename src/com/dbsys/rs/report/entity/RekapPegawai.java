@@ -6,20 +6,21 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 @Entity
-public class RekapPelayanan {
+public class RekapPegawai {
 
-	private Long id;
-	private String unit;
-	private String tindakan;
-	private Long tarif;
-	private Long jumlah;
-	private Long tambahan;
-	
-	// tidak persistent
-	private Long total;
+    private Long id;
+    private String nama;
+    private String tindakan;
+    private Long tarif;
+    private Long jumlah;
+    private Long total;
 
-	@Id
-	@Column
+    public RekapPegawai() {
+		super();
+	}
+
+    @Id
+    @Column
 	public Long getId() {
 		return id;
 	}
@@ -28,17 +29,17 @@ public class RekapPelayanan {
 		this.id = id;
 	}
 
-	@Column
-	public String getUnit() {
-		return unit;
+    @Column
+	public String getNama() {
+		return nama;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setNama(String nama) {
+		this.nama = nama;
 	}
 
 	@Column
-	public String getTindakan() {
+    public String getTindakan() {
 		return tindakan;
 	}
 
@@ -55,7 +56,7 @@ public class RekapPelayanan {
 		this.tarif = tarif;
 	}
 
-	@Column
+    @Column
 	public Long getJumlah() {
 		return jumlah;
 	}
@@ -64,27 +65,12 @@ public class RekapPelayanan {
 		this.jumlah = jumlah;
 	}
 
-	@Column
-	public Long getTambahan() {
-		return tambahan;
-	}
-
-	public void setTambahan(Long tambahan) {
-		this.tambahan = tambahan;
-	}
-
 	@Transient
 	public Long getTotal() {
-		hitungTotal();
 		return total;
 	}
 
 	public void setTotal(Long total) {
 		this.total = total;
-		hitungTotal();
-	}
-	
-	private void hitungTotal() {
-		total = jumlah * tarif + tambahan;
 	}
 }
