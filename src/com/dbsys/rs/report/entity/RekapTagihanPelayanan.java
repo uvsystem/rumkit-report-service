@@ -3,7 +3,7 @@ package com.dbsys.rs.report.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.dbsys.rs.lib.entity.Unit.TipeUnit;
+import com.dbsys.rs.security.entity.Unit.TipeUnit;
 
 @Entity
 public class RekapTagihanPelayanan extends RekapTagihan {
