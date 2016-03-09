@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dbsys.rs.ApplicationException;
 import com.dbsys.rs.ListEntityRestMessage;
+import com.dbsys.rs.Penanggung;
 import com.dbsys.rs.RestMessage.Type;
 import com.dbsys.rs.report.entity.RekapPelayanan;
 import com.dbsys.rs.report.entity.RekapTagihan;
@@ -55,6 +56,19 @@ public class TagihanController {
 	public ListEntityRestMessage<RekapPelayanan> rekapPelayanan(@PathVariable Date awal, @PathVariable Date akhir) throws ApplicationException, PersistenceException {
 		List<RekapPelayanan> list = reportService.rekapPelayanan(awal, akhir);
 		ListEntityRestMessage<RekapPelayanan> message = new ListEntityRestMessage<>();
+		message.setList(list);
+		message.setMessage("Berhasil!");
+		message.setTipe(Type.LIST);
+		
+		return message;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "{awal}/to/{akhir}/penanggung/{penanggung}")
+	@ResponseBody
+	public ListEntityRestMessage<RekapTagihan> rekapTagihan(@PathVariable Date awal, @PathVariable Date akhir, @PathVariable Penanggung penanggung) throws ApplicationException, PersistenceException {
+		List<RekapTagihan> list = reportService.rekapTagihan(awal, akhir, penanggung);
+		
+		ListEntityRestMessage<RekapTagihan> message = new ListEntityRestMessage<>();
 		message.setList(list);
 		message.setMessage("Berhasil!");
 		message.setTipe(Type.LIST);

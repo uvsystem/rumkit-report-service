@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dbsys.rs.Penanggung;
 import com.dbsys.rs.report.entity.RekapKembali;
 import com.dbsys.rs.report.entity.RekapPelayanan;
 import com.dbsys.rs.report.entity.RekapTagihanPelayanan;
@@ -90,5 +91,10 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<RekapPelayanan> rekapPelayanan(Date awal, Date akhir) {
 		return rekapPelayananRepository.rekap(awal, akhir);
+	}
+
+	@Override
+	public List<RekapTagihan> rekapTagihan(Date awal, Date akhir, Penanggung penanggung) {
+		return null;
 	}
 }

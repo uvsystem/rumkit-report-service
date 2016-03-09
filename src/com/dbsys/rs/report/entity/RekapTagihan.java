@@ -30,6 +30,9 @@ public class RekapTagihan {
 	private Long tarif;
 	private Long tambahan;
 	
+	// tidak persistent
+	private Long total;
+	
 	private String tipeTagihan;
 	
 	public RekapTagihan() {
@@ -107,5 +110,20 @@ public class RekapTagihan {
 
 	public void setTambahan(Long tambahan) {
 		this.tambahan = tambahan;
+	}
+
+	@Transient
+	public Long getTotal() {
+		hitungTotal();
+		return total;
+	}
+
+	public void setTotal(Long total) {
+		this.total = total;
+		hitungTotal();
+	}
+	
+	private void hitungTotal() {
+		total = jumlah * tarif + tambahan;
 	}
 }
